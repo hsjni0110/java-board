@@ -19,18 +19,14 @@ public class MemberRepository {
 
     public Member save(Member member) {
         member.setId(sequence);
-        members.put(sequence++, member);
+        members.put(member.getId(), member);
         return member;
     }
 
     public Optional<Member> findById(Long id) {
         // TODO [1단계] 저장된 회원 중 id가 일치하는 회원을 찾아 Optional 로 감싸서 반환하세요.
         // TODO [1단계] 만약 id가 일치하는 회원이 없는 경우, 빈 Optional 객체를 반환하세요.
-        if (!members.containsKey(id)) {
-            return Optional.empty();
-        }
-        Member member = members.get(id);
-        return Optional.of(member);
+       return Optional.ofNullable(members.get(id));
     }
 
     public Optional<Member> findByUsername(String username) {
@@ -38,9 +34,8 @@ public class MemberRepository {
         // TODO [1단계] 만약 username이 일치하는 회원이 없는 경우, 빈 Optional 객체를 반환하세요.
         return members.values()
                 .stream()
-                .peek(Member::getUsername)
-                .filter(targetName -> targetName.equals(username))
-                .findFirst();
+                .filter(member -> member.getUsername().equals(username))
+                .findAny();
     }
 
     // for test
