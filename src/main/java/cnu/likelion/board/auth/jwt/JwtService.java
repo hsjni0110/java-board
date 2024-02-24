@@ -30,7 +30,7 @@ public class JwtService {
         return JWT.create()
                 .withExpiresAt(new Date(
                         // TODO [2단계] 토큰의 만료일을 설정합니다. 만료일은 설정한 액세스 토큰 만료 기간(밀리초) + 현재시간(밀리초)
-                        accessTokenExpirationDayToMills
+                        accessTokenExpirationDayToMills + System.currentTimeMillis()
                 ))
                 .withIssuedAt(new Date())  // 현재 시간을 발급일로 설정합니다.
 
