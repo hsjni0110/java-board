@@ -18,7 +18,7 @@ public class MemberRepository {
     private Long sequence = 1L;
 
     public Member save(Member member) {
-        member.setId(sequence);
+        member.setId(sequence++);
         members.put(member.getId(), member);
         return member;
     }
